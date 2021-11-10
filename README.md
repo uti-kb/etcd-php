@@ -1,24 +1,16 @@
 # etcd-php
 PHP client for Etcd v3
 
-[![Build Status](https://travis-ci.org/ouqiang/etcd-php.png)](https://travis-ci.org/ouqiang/etcd-php)
-[![Latest Stable Version](https://poser.pugx.org/start-point/etcd-php/v/stable.png)](https://packagist.org/packages/start-point/etcd-php)
-[![Total Downloads](https://poser.pugx.org/start-point/etcd-php/downloads.png)](https://packagist.org/packages/ouqiang/etcd-php)
-[![License](https://poser.pugx.org/start-point/etcd-php/license.png)](https://packagist.org/packages/start-point/etcd-php)
-
-
-[documentation](https://github.com/ouqiang/etcd-php/wiki)
-
 Requirements
 ------------
-* PHP5.5+
+* PHP 7.4 or 8.0
 * Composer
 
 
 Installation
 ------------
 ```shell
-composer require start-point/etcd-php
+composer require blackpanda-media/etcd-php
 ```
 
 Usage
@@ -27,7 +19,7 @@ Usage
 ```php
 <?php
 require 'vendor/autoload.php';
-$client = new \Etcd\Client('127.0.0.1:2379');
+$client = new \BPM\Etcd\Client('127.0.0.1:2379');
 
 /*********** kv ***********/
 // set value
@@ -123,7 +115,7 @@ $client->grantUserRole('user', 'role');
 $client->revokeUserRole('user', 'role');
 
 // grant a permission of a specified key or range to a specified role
-$client->grantRolePermission('admin', \Etcd\Client::PERMISSION_READWRITE, 'redis');
+$client->grantRolePermission('admin', \BPM\Etcd\Client::PERMISSION_READWRITE, 'redis');
 
 // revoke a key or range permission of a specified role
 $client->revokeRolePermission('admin', 'redis');
