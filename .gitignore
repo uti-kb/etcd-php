@@ -6,7 +6,4 @@
 composer.lock
 vendor
 
-# project
-index.php
-package.json
-node_modules
+.phpunit.result.cache

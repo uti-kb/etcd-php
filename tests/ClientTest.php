@@ -1,32 +1,29 @@
 <?php
-/**
- * @author qiang.ou<qingqianludao@gmail.com>
- */
 
-namespace Etcd\Tests;
+declare(strict_types=1);
 
-use Etcd\Client;
+namespace BPM\Etcd\Tests;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+use BPM\Etcd\Client;
+use PHPUnit\Framework\TestCase;
+
+use function in_array;
+
+class ClientTest extends TestCase
 {
-    /**
-     * @var \Etcd\Client;
-     */
-    protected $client;
+    private Client $client;
+    private string $key = '/test';
+    private string $role = 'root';
+    private string $user = 'root';
+    private string $password = '123456';
 
-    protected $key = '/test';
-
-    protected $role = 'root';
-    protected $user = 'root';
-    protected $password = '123456';
-
-    public function setUp()
+    protected function setUp(): void
     {
         $this->client = new Client();
         $this->client->setPretty(true);
     }
 
-    public function testPutAndRange()
+    public function testPutAndRange(): void
     {
         $value = 'testput';
         $this->client->put($this->key, $value);
@@ -36,26 +33,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $body[$this->key]);
     }
 
-    public function testGetAllKeys()
+    public function testGetAllKeys(): void
     {
         $body = $this->client->getAllKeys();
         $this->assertNotEmpty($body);
     }
 
-    public function testGetKeysWithPrefix()
+    public function testGetKeysWithPrefix(): void
     {
         $body = $this->client->getKeysWithPrefix('/');
         $this->assertNotEmpty($body);
     }
 
-    public function testDeleteRange()
+    public function testDeleteRange(): void
     {
         $this->client->del($this->key);
         $body = $this->client->get($this->key);
         $this->assertArrayNotHasKey($this->key, $body);
     }
 
-    public function testGrant()
+    public function testGrant(): void
     {
         $body = $this->client->grant(3600);
         $this->assertArrayHasKey('ID', $body);
@@ -70,33 +67,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->revoke($id);
     }
 
-    public function testAddRole()
+    public function testAddRole(): void
     {
         $this->client->addRole($this->role);
     }
 
-    public function testAddUser()
+    public function testAddUser(): void
     {
         $this->client->addUser($this->user, $this->password);
     }
 
-    public function testChangeUserPassword()
+    public function testChangeUserPassword(): void
     {
         $this->client->changeUserPassword($this->user, '456789');
         $this->client->changeUserPassword($this->user, $this->password);
     }
 
-    public function testGrantUserRole()
+    public function testGrantUserRole(): void
     {
         $this->client->grantUserRole($this->user, $this->role);
     }
 
-    public function testGetRole()
+    public function testGetRole(): void
     {
         $this->client->getRole($this->role);
     }
 
-    public function testRoleList()
+    public function testRoleList(): void
     {
         $body = $this->client->roleList();
         if (!in_array($this->role, $body)) {
@@ -104,12 +101,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetUser()
+    public function testGetUser(): void
     {
         $this->client->getUser($this->user);
     }
 
-    public function testUserList()
+    public function testUserList(): void
     {
         $body = $this->client->userList();
         if (!in_array($this->user, $body)) {
@@ -117,13 +114,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGrantRolePermission()
+    public function testGrantRolePermission(): void
     {
         $this->client->grantRolePermission($this->role,
             Client::PERMISSION_READWRITE, '\0', 'z' );
     }
 
-    public function testAuthenticate()
+    public function testAuthenticate(): void
     {
         $this->client->authEnable();
         $token = $this->client->authenticate($this->user, $this->password);
@@ -137,22 +134,22 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->deleteUser('admin');
     }
 
-    public function testRevokeRolePermission()
+    public function testRevokeRolePermission(): void
     {
         $this->client->revokeRolePermission($this->role, '\0', 'z');
     }
 
-    public function testRevokeUserRole()
+    public function testRevokeUserRole(): void
     {
         $this->client->revokeUserRole($this->user, $this->role);
     }
 
-    public function testDeleteRole()
+    public function testDeleteRole(): void
     {
         $this->client->deleteRole($this->role);
     }
 
-    public function testDeleteUser()
+    public function testDeleteUser(): void
     {
         $this->client->deleteUser($this->user);
     }
