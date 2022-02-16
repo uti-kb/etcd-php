@@ -3,7 +3,7 @@ PHP client for Etcd v3
 
 Requirements
 ------------
-* PHP 7.4 or 8.0
+* PHP 7.4, 8.0 or 8.1
 * Composer
 
 
