@@ -223,7 +223,7 @@ class Client
      * LeaseGrant creates a lease which expires if the server does not receive a
      * keepAlive\nwithin a given time to live period. All keys attached to the lease
      * will be expired and\ndeleted if the lease expires.
-     * Each expired key generates a delete event in the event history.",
+     * Each expired key generates a delete event in the event history.
      *
      * @param int $ttl  TTL is the advisory time-to-live in seconds.
      * @param int $id   ID is the requested ID for the lease.
@@ -565,9 +565,7 @@ class Client
         if (!array_key_exists('timeout', $this->httpOptions)) {
             $this->httpOptions['timeout'] = self::DEFAULT_HTTP_TIMEOUT;
         }
-        $httpClient = new HttpClient($this->httpOptions);
-
-        return $httpClient;
+        return new HttpClient($this->httpOptions);
     }
 
     /**
