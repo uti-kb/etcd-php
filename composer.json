@@ -1,9 +1,9 @@
 {
-  "name": "blackpanda-media/etcd-php",
+  "name": "uti-kb/etcd-php",
   "type": "library",
   "description": "Fork of PHP client for Etcd v3",
   "keywords": ["etcdv3", "etcd", "etcd-client", "etcd-php"],
-  "homepage": "https://github.com/blackpanda-media/etcd-php",
+  "homepage": "https://github.com/uti-kb/etcd-php",
   "license": "MIT",
   "authors": [
     {
