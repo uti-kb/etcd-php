@@ -3,14 +3,14 @@ PHP client for Etcd v3
 
 Requirements
 ------------
-* PHP 7.4, 8.0 or 8.1
+* PHP 7.4, 8.0, 8.1, 8.2
 * Composer
 
 
 Installation
 ------------
 ```shell
-composer require blackpanda-media/etcd-php
+composer require uti-kb/etcd-php
 ```
 
 Usage
